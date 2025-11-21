@@ -1,0 +1,38 @@
+# ---- General ----
+*.log
+*.tmp
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# ---- IDE / Tools ----
+.vscode/
+.idea/
+*.iml
+
+# ---- Gradle / Java ----
+.gradle/
+build/
+out/
+!src/main/**/build/  # keep source files
+
+# ---- Node / Next.js ----
+node_modules/
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.turbo/
+
+# ---- Docker DB stuff ----
+docker/db/data/
+docker/db/logs/
+docker/db/*.log
+
+# Environment files
+docker/db/.env
+.env
+.env.*
+!.env.example
+docker/db/.env.example
