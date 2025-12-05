@@ -1,14 +1,13 @@
 package nl.fontys.fintrack.fintrack.infrastructure.config;
 
-
 import nl.fontys.fintrack.fintrack.repository.UserRepository;
 import nl.fontys.fintrack.fintrack.usecase.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 @Configuration
 public class ApplicationConfig {
-
 
     @Bean
     public RegisterUserUseCase registerUserUseCase(UserRepository userRepository,
