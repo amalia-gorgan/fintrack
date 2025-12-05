@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ApplicationConfig {
 
-    // PasswordHasher is already @Component, Spring auto-wires it
 
     @Bean
     public RegisterUserUseCase registerUserUseCase(UserRepository userRepository,

@@ -43,7 +43,7 @@ export default function LandingPage() {
                 throw new Error(msg);
             }
 
-            // Read JSON (your backend should return the token here)
+            // Read JSON
             const data = await res.json();
             console.log('Login response:', data);
 
@@ -65,7 +65,6 @@ export default function LandingPage() {
         <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-100 via-blue-50 to-sky-200 px-4">
             <div className="flex w-full max-w-5xl flex-col overflow-hidden rounded-3xl bg-white shadow-xl md:flex-row">
 
-                {/* Left side */}
                 <section className="flex-1 bg-slate-50 px-8 py-10 md:px-10">
                     <div className="mb-6 inline-block rounded-2xl bg-slate-100 px-6 py-3">
                         <h1 className="text-3xl font-semibold text-slate-900">Welcome!</h1>
@@ -85,7 +84,6 @@ export default function LandingPage() {
                     </div>
                 </section>
 
-                {/* Right side — login */}
                 <section className="flex-1 bg-slate-100 px-8 py-10 md:px-10">
                     <div className="mx-auto max-w-sm">
                         <div className="mb-6 rounded-xl bg-white px-4 py-2 text-center shadow-sm">

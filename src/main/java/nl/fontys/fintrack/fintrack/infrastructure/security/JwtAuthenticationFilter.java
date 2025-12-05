@@ -39,7 +39,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                     Long userId = jwtTokenProvider.getUserIdFromToken(token);
 
-                    // simple principal (userId) + ROLE_USER
                     var auth = new UsernamePasswordAuthenticationToken(
                             userId,
                             null,
@@ -50,7 +49,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     SecurityContextHolder.getContext().setAuthentication(auth);
                 }
             } catch (Exception ignored) {
-                // invalid token -> no auth set; request will be rejected by security rules
+                // invalid token =no auth set. request will be rejected by security rules
             }
         }
 

@@ -25,47 +25,42 @@ repositories {
 }
 
 dependencies {
-
-    implementation 'com.microsoft.sqlserver:mssql-jdbc'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
-    implementation 'com.microsoft.sqlserver:mssql-jdbc:12.4.2.jre11'
-
-    implementation 'org.flywaydb:flyway-core'
-    implementation 'com.microsoft.sqlserver:mssql-jdbc'
-
-    // JWT
-    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
-    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
-    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
-
-
+    // --- Application dependencies ---
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'io.projectreactor:reactor-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'      // keep only if you really use WebFlux
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'com.microsoft.sqlserver:mssql-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Database + Flyway
+    implementation 'com.microsoft.sqlserver:mssql-jdbc:12.6.1.jre11'         // example safe version; adjust if needed
     implementation 'org.flywaydb:flyway-core'
     implementation 'org.flywaydb:flyway-sqlserver'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // JWT (single consistent version)
     implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
-    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.3'
-    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.3'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    runtimeOnly   'io.jsonwebtoken:jjwt-impl:0.12.3'
+    runtimeOnly   'io.jsonwebtoken:jjwt-jackson:0.12.3'
+
+    // Lombok + config processor
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // --- Test dependencies ---
+
+    // brings JUnit 5, Mockito, AssertJ, Spring Test, etc.
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // security-specific testing helpers
     testImplementation 'org.springframework.security:spring-security-test'
+
+    testImplementation 'io.projectreactor:reactor-test'
 }
+
 
 tasks.named('test') {
 	useJUnitPlatform()

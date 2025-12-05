@@ -97,7 +97,7 @@ public class AuthController {
         }
     }
 
-    // ===== DTOs =====
+    //DTOs
 
     public static class RegisterRequest {
         public String email;

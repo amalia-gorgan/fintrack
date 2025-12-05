@@ -41,12 +41,11 @@ public class SecurityConfig {
                 // CSRF is not needed for token-based APIs
                 .csrf(csrf -> csrf.disable())
 
-                // Authorization rules
                 .authorizeHttpRequests(auth -> auth
-                        // 👇 Public endpoints (no token required)
+                        // Public endpoints (no token required)
                         .requestMatchers("/api/auth/register", "/api/auth/login").permitAll()
 
-                        // 👇 Everything else requires authentication (valid JWT)
+                        // Everything else requires authentication (valid JWT)
                         .anyRequest().authenticated()
                 )
 
@@ -62,8 +61,6 @@ public class SecurityConfig {
 
         // Frontend origin
         config.setAllowedOrigins(List.of("http://localhost:3000"));
-        // Or during dev you can be very open:
-        // config.setAllowedOriginPatterns(List.of("*"));
 
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
