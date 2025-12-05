@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   # ---------------------------
-  # 1) Build & test with Gradle
+  # 1) Build & test with Gradle (H2 DB)
   # ---------------------------
   build-test:
     runs-on: ubuntu-latest
@@ -24,27 +24,11 @@ jobs:
     permissions:
       contents: read
 
-    services:
-      mssql:
-        image: mcr.microsoft.com/mssql/server:2022-latest
-        env:
-          ACCEPT_EULA: "Y"
-          MSSQL_PID: "Developer"
-          MSSQL_SA_PASSWORD: ${{ secrets.MSSQL_SA_PASSWORD }}
-        ports:
-          - 1433:1433
-        # Healthcheck so tests don't start before DB is ready
-        options: >-
-          --health-cmd "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P $MSSQL_SA_PASSWORD -C -Q 'SELECT 1' || exit 1"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 10
+    # ❌ No SQL Server container here anymore
+    # Tests use H2 via application-test.properties automatically
 
     env:
-      SPRING_DATASOURCE_URL: jdbc:sqlserver://localhost:1433;databaseName=fintrackdb;encrypt=true;trustServerCertificate=true
-      SPRING_DATASOURCE_USERNAME: sa
-      SPRING_DATASOURCE_PASSWORD: ${{ secrets.MSSQL_SA_PASSWORD }}
-      # Optional: if you use JWT secret in tests
+      # Only env needed for tests
       JWT_SECRET: ilovefullstacksupersecretdevkeythatIsVeryLongAndSecure123456789012345
       JWT_EXPIRATION: 3600000
 
@@ -87,7 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
-    # Only build/push image for actual pushes to master, not PRs
+    # Only build/push for actual pushes to master (not PRs)
     if: github.ref == 'refs/heads/master'
 
     permissions:
@@ -96,7 +80,6 @@ jobs:
       id-token: write
 
     env:
-      # Image name in GHCR: ghcr.io/amalia-gorgan/fintrack
       IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/fintrack
 
     steps:
