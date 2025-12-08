@@ -1,8 +1,6 @@
 services:
   app:
-    build:
-      context: ../..
-      dockerfile: Dockerfile
+    image: ghcr.io/amalia-gorgan/fintrack:latest
     container_name: fintrack_app
     depends_on:
       mssql:
