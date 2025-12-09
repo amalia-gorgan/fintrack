@@ -8,7 +8,7 @@ public class RegisterUserUseCase {
 
     private final UserRepository userRepository;
     private final PasswordHasher passwordHasher;
-
+// command for changing the ci/cd pipeline
     public RegisterUserUseCase(UserRepository userRepository, PasswordHasher passwordHasher) {
         this.userRepository = userRepository;
         this.passwordHasher = passwordHasher;

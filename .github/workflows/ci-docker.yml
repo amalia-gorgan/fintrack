@@ -13,9 +13,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # -----------------------
-  # 1) Build & test (Gradle)
-  # -----------------------
+
   build-test:
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -24,9 +22,7 @@ jobs:
       contents: read
 
     env:
-      # Sensitive → from GitHub Actions secret (must be created in repo settings)
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
-      # Not sensitive → fine to keep inline
       JWT_EXPIRATION: 3600000
 
     steps:
@@ -60,15 +56,12 @@ jobs:
           name: test-reports
           path: build/reports/tests/test
 
-  # -------------------------------------
-  # 2) Build & push Docker image to GHCR
-  # -------------------------------------
+
   docker-image:
     needs: build-test
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
-    # Only build/push for actual pushes to master (not PRs)
     if: github.ref == 'refs/heads/master'
 
     permissions:
